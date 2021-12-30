@@ -41,4 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the user's messages.
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function messages()
+    {
+        return $this->morphMany(Message::class, 'messageable');
+    }
 }
