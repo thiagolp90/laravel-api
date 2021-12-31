@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\HasAttachments;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Message extends Model
 {
-    use HasFactory, SoftDeletes, HasAttachments;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -42,5 +41,14 @@ class Message extends Model
     public function from()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the message's attachments.
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function attachments()
+    {
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 }
