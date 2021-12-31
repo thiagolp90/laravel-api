@@ -23,11 +23,13 @@ class DatabaseSeeder extends Seeder
         // Attachment::truncate();
 
         //Create new users
-        User::factory(2)->create();
+        $users = User::factory(2)->create();
+        $firstUserId = $users->first()->id;
+        $lastUserId = $users->last()->id;
 
         //Create new messages
-        $user_id = 1;
-        $to = 2;
+        $user_id = $firstUserId;
+        $to = $lastUserId;
         $messages = [];
         for($x = 1; $x <= 4; $x++){
             $data = [
@@ -37,8 +39,8 @@ class DatabaseSeeder extends Seeder
                 'messageable_id'    => $to
             ];
             $messages[$x] = Message::create($data);
-            $user_id = $user_id == 1 ? 2 : 1;
-            $to = $to == 1 ? 2 : 1;
+            $user_id = $user_id == $firstUserId ? $lastUserId : $firstUserId;
+            $to = $to == $firstUserId ? $lastUserId : $firstUserId;
             sleep(2);
         }
 
