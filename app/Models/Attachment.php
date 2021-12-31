@@ -11,7 +11,7 @@ class Attachment extends Model
 {
     use HasFactory, SoftDeletes;
 
-    private $fillable = ['name', 'path'];
+    protected $fillable = ['name', 'path'];
 
     /**
     * Get the parent attachable model (message...).

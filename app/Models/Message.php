@@ -16,7 +16,7 @@ class Message extends Model
      *
      * @var array<int, string>
      */
-    private $fillable = ['parent_id', 'user_id', 'subject', 'message'];
+    protected $fillable = ['user_id', 'message'];
 
 
     /**
@@ -24,7 +24,7 @@ class Message extends Model
      *
      * @var array<int, string>
      */
-    private $hidden = ['parent_id', 'user_id'];
+    protected $hidden = ['user_id'];
 
     /**
     * Get the parent messageable model (user...).
@@ -33,24 +33,6 @@ class Message extends Model
     public function messageable()
     {
         return $this->morphTo();
-    }
-
-    /**
-     * Relationship with message's table parent
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function parent()
-    {
-        return $this->belongsTo(Message::class, 'parent_id');
-    }
-
-    /**
-     * Relationship with message's table children
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function children()
-    {
-        return $this->hasMany(Message::class, 'parent_id');
     }
 
     /**
