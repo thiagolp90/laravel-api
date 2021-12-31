@@ -20,6 +20,7 @@ class MessagesController extends Controller
                 ->where('messageable_type', 'App\Models\User')
                 ->where('messageable_id', $from);
         })
+            ->oldest()
             ->get();
 
         return MessageResource::collection($messages);

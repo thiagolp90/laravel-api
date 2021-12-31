@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             $messages[$x] = Message::create($data);
             $user_id = $user_id == 1 ? 2 : 1;
             $to = $to == 1 ? 2 : 1;
+            sleep(2);
         }
 
         //Create new attachments
