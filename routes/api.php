@@ -20,5 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function() {
-    Route::get('messages/{from}/{to}', [MessagesController::class, 'index']);
+    // Route::get('messages/{from}/{to}', [MessagesController::class, 'index']);
+    Route::get('messages', [MessagesController::class, 'index']);
 });

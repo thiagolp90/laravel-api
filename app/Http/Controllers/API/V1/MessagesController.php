@@ -5,12 +5,18 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MessageResource;
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MessagesController extends Controller
 {
-    public function index($from, $to)
+    // public function index($from, $to)
+    public function index()
     {
+        $users = User::all();
+        $from = $users->first()->id;
+        $to = $users->last()->id;
+
         $messages = Message::where(function($query) use($from, $to){
             $query->where('user_id', $from)
                 ->where('messageable_type', 'App\Models\User')
