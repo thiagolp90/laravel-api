@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
     public function run(Faker $faker)
     {
         //Truncate tables
-        User::truncate();
-        Message::truncate();
-        Attachment::truncate();
+        // User::truncate();
+        // Message::truncate();
+        // Attachment::truncate();
 
         //Create new users
         User::factory(2)->create();
