@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MessageResource;
@@ -18,7 +18,7 @@ class MessagesController extends Controller
         $from = $users->first()->id;
         $to = $users->last()->id;
 
-        $messages = Cache::remember('messages', 60, function () use($from, $to) {
+        $messages = Cache::remember('messages', 60*60*24, function () use($from, $to) {
             return Message::where(function($query) use($from, $to){
                 $query->where('user_id', $from)
                     ->where('messageable_type', 'App\Models\User')
